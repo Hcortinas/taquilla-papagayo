@@ -1,69 +1,139 @@
-# Sistema de Taquilla – Museo Interactivo Papagayo
+# Taquilla Papagayo
 
-## Requisitos
-- Python 3.11+
-- Tkinter (incluido en Python estándar)
-- ReportLab
+> Desktop ticketing system built for **Museo Interactivo Papagayo**, handling daily visitor ticket sales, shift management, and revenue reporting.
 
-## Instalación
+---
+
+## Overview
+
+Designed and developed to replace a manual ticketing process at the museum's entrance. The system manages ticket sales across multiple visitor categories, tracks daily shift revenue, and generates PDF reports for administration.
+
+> ⚠️ Source code is shared with permission from Museo Interactivo Papagayo. Database and reports are excluded from this repository.
+
+---
+
+## Features
+
+**Point of Sale**
+- Ticket sales across 12 visitor categories (children, adults, seniors, students, family packages, etc.)
+- Free ticket handling (courtesy, infants)
+- Variable pricing support (Pasaporte Papagayo)
+
+**Shift Management**
+- Session-based shift tracking per cashier
+- Shift open/close workflow
+- Revenue summary per shift
+
+**Reporting**
+- PDF shift reports generated automatically via ReportLab
+- Daily revenue breakdown by ticket type
+- Reports saved locally with timestamp
+
+**Access Control**
+- Role-based login: Administrator and Cashier
+- Session management per user
+
+**UI**
+- Built with Tkinter — native desktop interface
+- Museum branding (logo, color scheme)
+- Sandbox/demo mode for testing
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Language | Python 3.11+ |
+| UI | Tkinter (standard library) |
+| Database | SQLite (local) |
+| PDF Export | ReportLab |
+| Architecture | MVC — views / database / utils |
+
+---
+
+## Project Structure
+
+```
+taquilla_papagayo/
+├── main.py              ← Entry point
+├── config.py            ← Colors, paths, app settings
+├── requirements.txt
+├── database/
+│   ├── schema.sql       ← SQLite table definitions
+│   └── db_manager.py    ← All database logic
+├── views/
+│   ├── login.py         ← Login screen
+│   ├── venta.py         ← Main sales screen
+│   └── reporte.py       ← Shift report screen
+├── utils/
+│   └── pdf_export.py    ← PDF generation with ReportLab
+└── assets/
+    └── logo.png         ← Museum logo
+```
+
+---
+
+## Installation
 
 ```bash
-# 1. Clonar / copiar el proyecto
+# 1. Clone the repository
+git clone https://github.com/Hcortinas/taquilla-papagayo.git
 cd taquilla_papagayo
 
-# 2. Instalar dependencias
+# 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Ejecutar
+# 3. Run
 python main.py
 ```
 
-## Estructura del proyecto
-```
-taquilla_papagayo/
-├── main.py              ← Punto de entrada
-├── config.py            ← Configuración (colores, rutas, MySQL)
-├── requirements.txt
-├── database/
-│   ├── schema.sql       ← Esquema de tablas SQLite
-│   └── db_manager.py    ← Toda la lógica de BD
-├── views/
-│   ├── login.py         ← Pantalla de login
-│   ├── venta.py         ← Pantalla principal de venta
-│   └── reporte.py       ← Reporte de turno
-├── utils/
-│   └── pdf_export.py    ← Exportación PDF con ReportLab
-├── data/                ← Se crea automáticamente (aquí vive taquilla.db)
-└── reportes/            ← Se crea automáticamente (PDFs generados)
-```
+---
 
-## Usuarios por defecto
-| Usuario    | Contraseña  | Rol         |
-|------------|-------------|-------------|
-| admin      | admin123    | Administrador |
-| taquilla1  | taquilla1   | Taquillero  |
-| taquilla2  | taquilla2   | Taquillero  |
+## Default Users
 
-⚠️ **Cambiar contraseñas antes de poner en producción.**
+| Username | Password | Role |
+|----------|----------|------|
+| admin | admin123 | Administrator |
+| taquilla1 | taquilla1 | Cashier |
+| taquilla2 | taquilla2 | Cashier |
 
-## Tipos de boleto incluidos
-| Clave        | Nombre                          | Precio   |
-|--------------|---------------------------------|----------|
-| NINO         | Niño (2–11 años)                | $83      |
-| ADULTO       | Adulto (12–59 años)             | $100     |
-| 3RA_EDAD     | 3ra Edad / Cap. Diferentes      | $50      |
-| ESTUDIANTE   | Estudiante / Profesor           | $83      |
-| MIERCOLES_2X1| Miércoles 2x1                   | $100     |
-| FAM_4        | Paquete Familiar (4 personas)   | $219     |
-| FAM_5        | Paquete Familiar (5 personas)   | $267     |
-| PASE_2X1     | Pase Cortesía 2x1               | $83      |
-| CLUB         | Club Papagayo                   | $100     |
-| PASAPORTE    | Pasaporte Papagayo              | Variable |
-| CORTESIA     | Cortesía                        | Gratis   |
-| BEBE         | Niño menor de 2 años            | Gratis   |
+> ⚠️ Change passwords before deploying to production.
+
+---
+
+## Ticket Categories
+
+| Key | Name | Price |
+|-----|------|-------|
+| NINO | Child (2–11 yrs) | $83 |
+| ADULTO | Adult (12–59 yrs) | $100 |
+| 3RA_EDAD | Senior / Disability | $50 |
+| ESTUDIANTE | Student / Teacher | $83 |
+| MIERCOLES_2X1 | Wednesday 2x1 | $100 |
+| FAM_4 | Family Pack (4 people) | $219 |
+| FAM_5 | Family Pack (5 people) | $267 |
+| CORTESIA | Courtesy | Free |
+| BEBE | Infant (under 2) | Free |
+
+---
 
 ## Roadmap
-- **Fase 1 (actual):** Sistema local SQLite + UI completa
-- **Fase 2:** Sincronización MySQL remoto
-- **Fase 3:** Dashboard admin (reportes por mes, Power BI export)
-- **Fase 4:** Impresión de tickets (ESC/POS)
+
+- ✅ Phase 1: Local SQLite + full UI
+- 🔄 Phase 2: Remote MySQL sync
+- 📋 Phase 3: Admin dashboard (monthly reports, Power BI export)
+- 📋 Phase 4: Ticket printing (ESC/POS)
+
+---
+
+## Status
+
+🔄 **In active development** — Phase 1 complete, Phase 2 in progress.
+
+---
+
+## Author
+
+**Hugo David Cortinas González**
+[LinkedIn](https://www.linkedin.com/in/hugodavidcortinasgonzalez) · [GitHub](https://github.com/Hcortinas)
