@@ -1,0 +1,2 @@
+reportlab>=4.0
+# mysql-connector-python>=8.0  # Descomentar para Fase 2 (sincronización MySQL)
